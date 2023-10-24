@@ -1,11 +1,27 @@
-/* eslint-disable */
-import "bootstrap";
-import "./style.css";
+const buttonGenerateFib = document.getElementById("generateFib");
+const inputNumber = document.getElementById("inputNumber");
+const resultNumbers = document.getElementById("resultNumbers");
 
-import "./assets/img/rigo-baby.jpg";
-import "./assets/img/4geeks.ico";
+buttonGenerateFib.addEventListener("click", () => {
+  let number = /^[0-9]+$/;
+  number = parseInt(inputNumber.value);
+  const newFibonacciNumber = fib(number);
+  resultNumbers.innerHTML = "";
+  newFibonacciNumber.forEach(num => {
+    const listItem = document.createElement("li");
+    listItem.textContent = num;
+    resultNumbers.appendChild(listItem);
+  });
+});
 
-window.onload = function() {
-  //write your code here
-  console.log("Hello Rigo from the console!");
+const fib = (number, numFibInicio = [0, 1]) => {
+  if (number <= numFibInicio.length) {
+    return numFibInicio;
+  }
+
+  const nextValue =
+    numFibInicio[numFibInicio.length - 1] +
+    numFibInicio[numFibInicio.length - 2];
+  numFibInicio.push(nextValue);
+  return fib(number, numFibInicio);
 };
